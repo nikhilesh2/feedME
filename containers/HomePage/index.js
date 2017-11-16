@@ -18,9 +18,9 @@ export default class HomePage extends React.Component {
        					<View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
        						<Text style={{ color: '#73d9b2', fontWeight: 'bold', left: 15 }}>Today, November 16, 2017 </Text>
        					</View>
-    		  			<ListItem org="Computer Science Club" />
-    		  			<ListItem org="AMF" />
-    		  			<ListItem org="American Red Cross" verified />
+    		  			<ListItem org="Computer Science Club" vote="up"/>
+    		  			<ListItem org="AMF" vote="down"/>
+    		  			<ListItem org="American Red Cross" verified/>
     		  			<View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
     		  				<Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Tomorrow, November 17, 2017</Text>
     		  				</View>

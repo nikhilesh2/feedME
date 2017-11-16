@@ -5,7 +5,6 @@ import { UITheme } from '../../utils/MuiTheme';
 import { height, width } from '../../utils/getDimensions';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 import EntypoIcon from 'react-native-vector-icons/Entypo';
-import CalendarStrip from 'react-native-calendar-strip';
 
 export default class AppBar extends React.Component {
   render() {
@@ -21,9 +20,6 @@ export default class AppBar extends React.Component {
           <View style={{ flexDirection: 'column', alignItems: 'flex-end' }}>
             <Text style={{ color: 'white', fontSize: 18, flex: 1, opacity: 0.7 }}>Map View</Text>
          </View>
-         <View style={style}>
-                <CalendarStrip />
-              </View>
         </View>
         <View style={innerWrapper}>
     	   <Text style={{ color: 'white', fontSize: 24, flex: 1 }}>University of Pittsburgh</Text>
@@ -40,6 +36,7 @@ export default class AppBar extends React.Component {
     );
   }
 }
+
 
 
 const style = {
