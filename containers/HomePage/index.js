@@ -9,7 +9,7 @@ import ListItem from '../../components/ListItem';
 var {height, width} = Dimensions.get('window')
 export default class HomePage extends React.Component {
   render() {
-  	var csc = "Our club will be recruiting new members for our club. We will also answer any questions you may have!";
+  	var csc = "Our club will be recruiting new members. We will also answer any questions you may have!";
   	var delta = "Looking to rush for the spring 2018 semester? Stop by to learn more about our Fraternity";
   	var AP = "Want to help raise awareness for mental illness? Come to your fundraiser and learn more about our organization!";
     return (
