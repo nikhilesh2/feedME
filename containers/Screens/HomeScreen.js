@@ -1,9 +1,7 @@
 import React from 'react';
 import {View, Text, StyleSheet, Platform, Dimensions, ScrollView } from 'react-native';
 import { Toolbar, ActionButton, Card } from 'react-native-material-ui';
-
-
-const util = require('util');
+import { Container, Header, Title, Left, Icon, Right, Button, Body, Content, CardItem } from "native-base";
 
 import { UITheme } from '../../utils/MuiTheme';
 import AppBar from '../../components/AppBar';
@@ -15,26 +13,29 @@ import {
 
 var {height, width} = Dimensions.get('window')
 
-export default class HomeScreen extends React.Component {
+export default class HomePage extends React.Component {
 
   
   render() {
     
-
+    // var {navigate} = this.prop.navigation;
   	var csc = "Our club will be recruiting new members. We will also answer any questions you may have!";
   	var delta = "Looking to rush for the spring 2018 semester? Stop by to learn more about our Fraternity";
   	var AP = "Want to help raise awareness for mental illness? Come to your fundraiser and learn more about our organization!";
     return (
-    	<View>
-      
-          <Text>OOsdojcodsicjodsijcsodcjsdojij </Text>
-    			   <Button full rounded dark
-            style={{ marginTop: 10 }}
-            onPress={() => this.props.navigation.navigate("Map")}>
-            <Text>Chat With People</Text>
-          </Button>
+     
+    	
+      <View>
+      {// <Button full rounded primary
+      //       style={{ marginTop: 10 }}
+      //       onPress={() => this.props.navigation.navigate("Map")}>
+      //       <Text>Goto Profiles</Text>
+      //     </Button>
+    }
+        	<AppBar />
+    			 
     		  
-       				<ScrollView>
+       				<ScrollView >
        					<View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
        						<Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Today, November 16, 2017 </Text>
        					</View>
@@ -55,12 +56,13 @@ export default class HomeScreen extends React.Component {
     		  			<ListItem />
     		  		</ScrollView>     
       			
-              
+
     			
           	<View>
           		<ActionButton style={styles}/>
         	</View>
        </View>
+       
     );
   }
 }

@@ -21,16 +21,9 @@ export default class AppBar extends React.Component {
             <Text style={{ color: 'white', fontSize: 18, flex: 1, opacity: 0.7 }}>Map View</Text>
          </View>
         </View>
-        <View style={innerWrapper}>
-    	   <Text style={{ color: 'white', fontSize: 24, flex: 1.25 }}>University of Pittsburgh</Text>
-         <Text style={{ color: 'white', fontSize: 56, flex: 2.25 }}>14</Text>
-        {/*} <Text style={{ color: 'white', fontSize: 18, flex: 1, opacity: 0.9 }}>Near you</Text>*/}
-        </View>
        
-        <View contentContainerStyle={calendarStrip.contentContainer}>
-           <Text style={{ color: 'white', fontSize: 18, paddingBottom: 10 }}>November</Text>
-           
-           <ScrollView horizontal={true} style={{ backgroundColor: 'red'}}>
+        <ScrollView contentContainerStyle={calendarStrip.contentContainer}>
+           <Text style={{ color: 'white', fontSize: 18, paddingBottom: 0 }}>November</Text>
            <View style={{ flexDirection: 'row', alignSelf: 'center', alignItems: 'flex-end', justifyContent: 'flex-end' }}>
              <Text style={dowStyle}>Sun</Text>
              <Text style={dowStyle}>Mon</Text>
@@ -54,12 +47,10 @@ export default class AppBar extends React.Component {
              <Text style={dayStyle}>18</Text>
              
            </View>
-           </ScrollView>
           
-        </View>
-          
+        </ScrollView>
+        
       </View>
-
        
     );
   }
@@ -97,16 +88,17 @@ const dowStyle = {
 const style = {
   height: (Platform.OS === 'ios') ? 100 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
   backgroundColor: UITheme.palette.primaryColor,
-  height: height/2.35,
+  height: height/4,
   paddingTop: (Platform.OS === 'ios') ? 30 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
 }
 const calendarStrip = StyleSheet.create({
   contentContainer: {
-    flex: 1,
+    flex: 0.7,
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    paddingTop: 35
+    paddingTop: 30
+
   }
 });
 

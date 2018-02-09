@@ -3,10 +3,16 @@ import Expo from "expo";
 import { StyleSheet, Text, View } from 'react-native';
 import { ThemeProvider } from 'react-native-material-ui';
 
-import HomePage from './containers/HomePage';
+import HomeScreen from './containers/Screens/index.js';
 import { UITheme } from './utils/MuiTheme';
+import { StackNavigator } from 'react-navigation';
+import MapScreen from './containers/Screens/MapScreen';
 
 
+// const Navigation = StackNavigator({
+//   First: {screen: HomeScreen},
+//   Second: {screen: MapScreen}
+// });
 export default class App extends React.Component {
    constructor() {
       super();
@@ -31,7 +37,7 @@ export default class App extends React.Component {
     }
     return (
       <ThemeProvider uiTheme={UITheme}>
-        <HomePage />
+        <HomeScreen />
       </ThemeProvider>
     );
   }
@@ -45,3 +51,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+
+
+
+
+
