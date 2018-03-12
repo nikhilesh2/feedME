@@ -90,7 +90,7 @@ export default class HomePage extends React.Component {
               <View style={{height: '100%'}}>
 
                 {
-
+                  
                   this.state.events.map(function(event, i){
                       
                      return( 

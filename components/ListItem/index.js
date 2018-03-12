@@ -11,35 +11,37 @@ export default class ListItem extends React.Component {
   render() {
     const vote = this.props.vote ? this.props.vote: '';
     return (
-    	<View style={style}>
-        <View style={row}>
-          {/*<View style={{width: 10, backgroundColor: this.props.verified ? UITheme.palette.primaryColor : '#BDBDBD' }}></View>*/}
-          <View style={info}>
-    	      <Text style={{flex: 1, alignSelf: 'flex-start', fontWeight: 'bold', color: '#4bce9c', paddingTop: 10, paddingLeft: 10 }}>{this.props.org}</Text>
-            <View style={description}>
-              <Text style={{ fontSize: 13, paddingLeft: 10, alignSelf: 'center' }}>{this.props.description}</Text>
-            </View>
-            <View style={specs}>
-              <MaterialIcons style={{ flex: 1, alignSelf: 'flex-start', paddingLeft: 10 }} name="clock" size={12} color="#666666"><Text style={{ color: '#999999', marginLeft: 10 }}>{this.props.time}</Text></MaterialIcons>
-              <MaterialIcons style={{ flex: 1, alignSelf: 'flex-start', paddingLeft: 10 }} name="food" size={12} color="#666666"><Text style={{ color: '#999999', left: 10 }}>{this.props.food}</Text></MaterialIcons>
-            </View>
-          </View>
-                 
+    	<View style={wrapperStyle}>
+        <Text style={{flex: 1, alignSelf: 'flex-start', paddingLeft: 15, paddingTop: 5, fontWeight: 'bold', color: '#4bce9c', }}>{this.props.org}</Text>
+        <View style={description}>
+            <Text style={{ fontSize: 13, alignSelf: 'flex-start' }}>{this.props.description}</Text>
         </View>
-
+        <View style={row}> 
+          <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+            <MaterialIcons name="clock" size={12} color="#666666"></MaterialIcons>
+            <Text style={{ color: '#999999'}}>{this.props.time}</Text>
+          </View>
+          <View style={{ flexDirection: 'row', alignItems: 'center', flex: 1 }}>
+            <MaterialIcons name="food" size={12} color="#666666"></MaterialIcons>
+            <Text style={{ color: '#999999' }}>{this.props.food}</Text>
+          </View>
+          
+         
+        </View>
+                 
       </View>
-       
     );
   }
 }
 
-const style = {
+const wrapperStyle = {
   flexDirection: 'column',
   alignSelf: 'center',
   width: width, 
-  height: height/6, 
+  height: height/6,
   borderBottomWidth: 1,
-  borderBottomColor: UITheme.palette.outline,
+  borderBottomColor: '#E0E0E0',
+  paddingBottom: 5
 }
 
 const info = {
@@ -55,9 +57,7 @@ const specs = {
   flex: 1,
 }
 const description = {
-  flexDirection: 'row',
-  alignSelf: 'center',
-  flex: 3,
+  paddingLeft: 15,
 }
 
 const votes = {
@@ -69,11 +69,7 @@ const votes = {
 }
 
 const row = {
-  flex: 1,
-  width: '100%',
-  height:  height/8,
   flexDirection: 'row',
-  margin: 0,
-  padding: 0,
- 
+  paddingLeft: 15,
+  paddingTop: 15,
 }
