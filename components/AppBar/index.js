@@ -113,7 +113,7 @@ export default class AppBar extends React.Component {
     	<View style={style}>
        
       
-      <TouchableWithoutFeedback onPress={() => this.props.handleOpen()} style={{backgroundColor: 'blue', position:'absolute'}}>
+      <TouchableWithoutFeedback onPress={() => {this.props.handleOpen()}} style={{backgroundColor: 'blue', position:'absolute'}}>
           <View style={{position:'absolute' }}>
             <EntypoIcon name="plus" size={40} color='white' />
           </View>

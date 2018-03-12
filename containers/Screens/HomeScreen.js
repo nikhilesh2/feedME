@@ -32,12 +32,15 @@ export default class HomePage extends React.Component {
 
    
   }
-
-
-  handleCreateEvent(event){
+  componentDidMount() {
     this.setState({
-      events: this.state.events.push(event)
-    });
+      events: events2
+    })
+  }
+  handleCreateEvent(event){
+    const events = this.state.events;
+    events.unshift(event);
+    this.setState({ events });
   }
   
   handleOpenClose() {
@@ -62,7 +65,8 @@ export default class HomePage extends React.Component {
   
   render() {
     const hold = this;
-
+    console.log("STATE");
+    console.log(this.state)
 
     const navigate = this.props.navigation;
     // var {navigate} = this.prop.navigation;
@@ -84,14 +88,14 @@ export default class HomePage extends React.Component {
            
        				<ScrollView contentContainerStyle={{height: 960, overflow:'scroll'}}>
               <View style={{height: '100%'}}>
-              
+
                 {
 
                   this.state.events.map(function(event, i){
                       
                      return( 
 
-                      <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event: event})}>
+                      <TouchableWithoutFeedback key={i} onPress={() => {navigate.navigate("Template", {event: event}) }}>
                           <View>
                             <ListItem org= {event.name} time= {event.time} food={event.food} description={event.shortDescription} />
                           </View>
@@ -110,7 +114,7 @@ export default class HomePage extends React.Component {
                   animationType={'slide'}  
               >
              <View>
-                <CreateEvents handleClose={this.handleOpenClose}/>
+                <CreateEvents handleClose={this.handleOpenClose} handleCreateEvent={this.handleCreateEvent}/>
              </View>
           </Modal>
       		

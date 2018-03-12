@@ -21,7 +21,7 @@ export default class CreateEvent extends React.Component {
   
 
   handleCloseAndCreate(){
-    this.props.handleCreateEvent({name: "hi"});
+    this.props.handleCreateEvent({name: this.state.nameOfEvent, date: this.state.date, time: this.state.time, location: this.state.location, shortDescription: this.state.description, food: this.state.food});
     this.props.handleClose();
   }
   render() {
@@ -43,6 +43,8 @@ export default class CreateEvent extends React.Component {
        
             <TextInput
               style={{ padding: 10, width: '92%', alignSelf:'center', height: 40, borderWidth: 0, backgroundColor: '#F7F8FC' }}
+              value={this.state.nameOfEvent}
+              onChangeText={(nameOfEvent) => this.setState({nameOfEvent})}
               placeholder="Name of Event" />
         
           <View style={{ flexDirection: 'column', flex: 0.8, height: '100%' }}>
@@ -50,6 +52,7 @@ export default class CreateEvent extends React.Component {
               <TextInput
                 style={{ padding: 10, width: '100%', marginTop: 20, height: 50, borderWidth: 0, backgroundColor: '#F7F8FC' }}
                 placeholder="Date" 
+                onChangeText={(date) => this.setState({date})}
                 multiline={true}/>
             </View>
           </View>
@@ -59,6 +62,7 @@ export default class CreateEvent extends React.Component {
               <TextInput
                 style={{ padding: 10, width: '100%', marginTop: 20, height: 50, borderWidth: 0, backgroundColor: '#F7F8FC' }}
                 placeholder="Time" 
+                onChangeText={(time) => this.setState({time})}
                 multiline={true}/>
             </View>
           </View>
@@ -68,6 +72,7 @@ export default class CreateEvent extends React.Component {
               <TextInput
                 style={{ padding: 10, width: '100%', marginTop: 20, height: 75, borderWidth: 0, backgroundColor: '#F7F8FC' }}
                 placeholder="Location" 
+                onChangeText={(location) => this.setState({location})}
                 multiline={true}/>
             </View>
           </View>
@@ -76,7 +81,8 @@ export default class CreateEvent extends React.Component {
             <View style={{ flexDirection: 'row', flex: 1, padding: 15 }}>
               <TextInput
                 style={{ padding: 10, width: '100%', marginTop: 20, height: 100, borderWidth: 0, backgroundColor: '#F7F8FC' }}
-                placeholder="Description" 
+                placeholder="Description"
+                onChangeText={(description) => this.setState({description})}
                 multiline={true}/>
             </View>
           </View>
@@ -85,13 +91,14 @@ export default class CreateEvent extends React.Component {
             <View style={{ flexDirection: 'row', flex: 1, padding: 15 }}>
               <TextInput
                 style={{ padding: 10, width: '100%', marginTop: 20, height: 100, borderWidth: 0, backgroundColor: '#F7F8FC' }}
-                placeholder="Food" 
+                placeholder="Food"
+                onChangeText={(food) => this.setState({food})}
                 multiline={true}/>
             </View>
           </View>
 
            <View style={{ flexDirection: 'column', flex: 1, height: '100%', paddingTop: 15, paddingLeft: 25, paddingRight: 25}}>
-              <TouchableWithoutFeedback onPress={this.handleCloseAndCreate()}>
+              <TouchableWithoutFeedback onPress={() => {this.handleCloseAndCreate()}}>
                 <View style={{ backgroundColor: UITheme.palette.primaryColor, height: 60, alignItems: 'center', justifyContent: 'center' }}>
                   <Text style={{ color: 'white', alignSelf: 'center', fontSize: 20}}>Create</Text>
                 </View>
