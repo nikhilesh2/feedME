@@ -1,18 +1,44 @@
 import React from 'react';
 import Expo from "expo";
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, Animated, Easing } from 'react-native';
 import { ThemeProvider } from 'react-native-material-ui';
 
-import HomeScreen from './containers/Screens/index.js';
+
 import { UITheme } from './utils/MuiTheme';
 import { StackNavigator } from 'react-navigation';
 import MapScreen from './containers/Screens/MapScreen';
+import Login from './containers/Screens/Login';
+import Template from './containers/Screens/DescriptionTemplate';
+import HomeScreen from './containers/Screens/HomeScreen.js';
+import Health from './containers/Screens/HealthDescription.js';
+import RandomClub from './containers/Screens/RandomClub.js';
+import singleItemMap from './containers/Screens/singleItemMap.js';
 
 
-// const Navigation = StackNavigator({
-//   First: {screen: HomeScreen},
-//   Second: {screen: MapScreen}
-// });
+const Navigation = StackNavigator({
+  Overview: {screen: HomeScreen},
+  Login: {screen: Login},
+  
+  Map: {screen: MapScreen},
+  Template: {screen: Template},
+  Health: {screen: Health},
+  singleItemMap: {screen: singleItemMap},
+  RandomClub: {screen: RandomClub}
+  
+}, { headerMode: 'none',
+    
+    transitionConfig : () => ({
+    transitionSpec: {
+      duration: 0,
+      timing: Animated.timing,
+      easing: Easing.step0,
+    },
+  }) 
+},
+  
+);
+
+
 export default class App extends React.Component {
    constructor() {
       super();
@@ -37,7 +63,7 @@ export default class App extends React.Component {
     }
     return (
       <ThemeProvider uiTheme={UITheme}>
-        <HomeScreen />
+        <Navigation />
       </ThemeProvider>
     );
   }

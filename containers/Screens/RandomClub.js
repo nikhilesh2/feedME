@@ -24,62 +24,58 @@ import {
 
 var {height, width} = Dimensions.get('window')
 
-export default class Template extends React.Component {
+export default class RandomClub extends React.Component {
 
   
   render() {
+       
     // var {navigate} = this.prop.navigation;
-    var csc = "OOOOIIIiI";
+    var array = [events[3]];
+    var csc = "OOOOIIII";
     var delta = "Looking to rush for the spring 2018 semester? Stop by to learn more about our Fraternity";
     var AP = "Want to help raise awareness for mental illness? Come to your fundraiser and learn more about our organization!";
     const navigate = this.props.navigation;
-    var event = this.props.navigation.state.params.event;
-    var array = [event];
-    
-    
     return (
      
       
       <View>
       
-          <DescBar name = {event.name} navigation = {navigate}/>
+          <DescBar name = {events[3].name} navigation = {navigate}/>
            
           
               <ScrollView contentContainerStyle={{overflow:'scroll'}}>
                 <View style={{ flexDirection: 'row', alignItems: 'center', height: height/16 }}>
                   <Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Description</Text>
                 </View>
-               <DescriptionItem description = {event.description} />
+               <DescriptionItem description = {events[3].description} />
     
                  <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
                   <Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Date and Time</Text>
                 </View>
-                  <TimeItem time = {event.time} date= {event.date} />
+                  <TimeItem time = {events[3].time} date= {events[3].date} />
                  
                  <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
                   <Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Location</Text>
                 </View>
-                 <LocationItem location = {event.location} />
+                 <LocationItem location = {events[3].location} />
                  
                  <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
                   <Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Food</Text>
                 </View>
-                <FoodItem food = {event.foodDescription} />
+                <FoodItem food = {events[3].foodDescription} />
                  
                  <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
                   <Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Additional Comments</Text>
                 </View>
-                <CommentItem comments = {event.comments} />
+                <CommentItem comments = {events[3].comments} />
 
-              
-                <View style={row}>
+               <View style={row}>
                 <TouchableWithoutFeedback onPress={() => navigate.navigate("singleItemMap", {event: array})}>
                 <View style ={{backgroundColor: 'orange', width: '100%', height: 50, alignItems: 'center'}}>
                   <Text style={{ color: 'white', paddingTop: 15, fontWeight: 'bold', fontSize: 15}}>View on Map</Text>
                 </View>
                 </TouchableWithoutFeedback>
                 </View>
-              
 
               
                 

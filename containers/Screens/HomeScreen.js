@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Text, StyleSheet, Platform, Dimensions, ScrollView } from 'react-native';
+import {View, Text, StyleSheet, Platform, Dimensions, ScrollView, TouchableWithoutFeedback, Modal } from 'react-native';
 import { Toolbar, ActionButton, Card } from 'react-native-material-ui';
 import { Container, Header, Title, Left, Icon, Right, Button, Body, Content, CardItem } from "native-base";
 
 import { UITheme } from '../../utils/MuiTheme';
 import AppBar from '../../components/AppBar';
 import ListItem from '../../components/ListItem';
+import CreateEvents from '../../components/CreateEvents';
+import {events} from '../../events.js';
+import {events2} from '../../events2.js';
 import {
   StackNavigator,
 } from 'react-navigation';
@@ -15,9 +18,53 @@ var {height, width} = Dimensions.get('window')
 
 export default class HomePage extends React.Component {
 
+ constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+      events: events2
+
+    }
+    this.handleOpenClose = this.handleOpenClose.bind(this);
+    this.handleCreateEvent = this.handleCreateEvent.bind(this);
+    this.createDayArray = this.createDayArray.bind(this);
+
+
+   
+  }
+
+
+  handleCreateEvent(event){
+    this.setState({
+      events: this.state.events.push(event)
+    });
+  }
+  
+  handleOpenClose() {
+    this.setState({
+      modalVisible: !this.state.modalVisible,
+    });
+  }
+
+  createDayArray(day) {
+    var dayEvents = [];
+
+    for(var i = 0; i < events.length; i++){
+      
+      if(events[i].day === day){
+        dayEvents.push(events[i]);
+      }
+    }
+   this.setState({events: dayEvents});
+   return dayEvents;
+  }
+  
   
   render() {
-    
+    const hold = this;
+
+
+    const navigate = this.props.navigation;
     // var {navigate} = this.prop.navigation;
   	var csc = "Our club will be recruiting new members. We will also answer any questions you may have!";
   	var delta = "Looking to rush for the spring 2018 semester? Stop by to learn more about our Fraternity";
@@ -32,35 +79,41 @@ export default class HomePage extends React.Component {
       //       <Text>Goto Profiles</Text>
       //     </Button>
     }
-        	<AppBar />
+        	<AppBar navigation={navigate}  handleOpen={this.handleOpenClose} createDayArray={this.createDayArray}/>
     			 
-    		  
-       				<ScrollView >
-       					<View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
-       						<Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Today, November 16, 2017 </Text>
-       					</View>
-    		  			<ListItem org="Computer Science Club" time="12:00-2:00" food="Baked Goods" netVotes={24} description={csc} />
-    		  			<ListItem org="Delta Sigma Phi" vote="down" time="2:15-3:00" food="Coffee" netVotes={18} description={delta} />
-    		  			<ListItem org="NAMI" time="2:30-4:00" food="Pizza" netVotes={13} description={AP} />
-    		  			<View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8F8F8', height: height/16 }}>
-    		  				<Text style={{ color: '#BDBDBD', fontWeight: 'bold', left: 15 }}>Tomorrow, November 17, 2017</Text>
-    		  				</View>
-    		  			
-    		  			<ListItem org="Robotics Club"  time="3:00-4:30" food="Pizza" netVotes={4}/>
-    		  			<ListItem org="Club Football" />
-    		  			<ListItem />
-    		  			<ListItem />
-    		  			<ListItem />
-    		  			<ListItem />
-    		  			<ListItem />
-    		  			<ListItem />
-    		  		</ScrollView>     
-      			
+           
+       				<ScrollView contentContainerStyle={{height: 960, overflow:'scroll'}}>
+              <View style={{height: '100%'}}>
+              
+                {
 
-    			
-          	<View>
-          		<ActionButton style={styles}/>
-        	</View>
+                  this.state.events.map(function(event, i){
+                      
+                     return( 
+
+                      <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event: event})}>
+                          <View>
+                            <ListItem org= {event.name} time= {event.time} food={event.food} description={event.shortDescription} />
+                          </View>
+                      </TouchableWithoutFeedback>
+                      )
+                  })
+                }
+                </View>
+       			   
+    		  		</ScrollView> 
+             
+     
+              
+              <Modal
+                  visible={this.state.modalVisible}
+                  animationType={'slide'}  
+              >
+             <View>
+                <CreateEvents handleClose={this.handleOpenClose}/>
+             </View>
+          </Modal>
+      		
        </View>
        
     );
@@ -82,6 +135,17 @@ const styles = StyleSheet.create({
   }
 
 })
+
+const calendarStrip = StyleSheet.create({
+  contentContainer: {
+    flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 35
+  }
+});
+
 const List = StyleSheet.create({
   contentContainer: {
   

@@ -9,7 +9,6 @@ import StrippedBar from '../../components/AppBar/StrippedAppBar.js';
 import ListItem from '../../components/ListItem';
 
 import {events} from '../../events.js';
-import {events2} from '../../events2.js';
 
 import {
   StackNavigator,
@@ -77,43 +76,20 @@ const styles = StyleSheet.create({
 });
 
 
-export default class MapScreen extends Component {
-  
- constructor(props) {
-    super(props);
-    this.state = {
-      isOpen: false,
-      selectedItem: 'About',
-      events: events2
+export default class singleItemMap extends Component {
+  state = {
+    isOpen: false,
+    selectedItem: 'About',
+  };
 
-    }
-
-    this.createDayArray = this.createDayArray.bind(this);
-     
-  }
-
-
-
-  createDayArray(day) {
-    var dayEvents = [];
-
-    for(var i = 0; i < events.length; i++){
-      
-      if(events[i].day === day){
-        dayEvents.push(events[i]);
-      }
-    }
-   this.setState({events: dayEvents});
-
-  }
-  
 
   render() {
-     const navigate = this.props.navigation;
-    
+    const navigate = this.props.navigation;
+    var singleEvent = this.props.navigation.state.params.event;
+    console.log(singleEvent[0].page);
     return (
       <View>
-       	<StrippedBar navigation = {navigate} createDayArray={this.createDayArray}/>
+       	<StrippedBar navigation = {navigate}/>
           
 
 
@@ -121,35 +97,34 @@ export default class MapScreen extends Component {
        initialRegion={{
          latitude: 40.445025,
          longitude: -79.960803,
-         latitudeDelta: 0.0222,
-         longitudeDelta: 0.0121,
+         latitudeDelta: 0.0922,
+         longitudeDelta: 0.0421,
        }}
 
        >
 
        {
-          this.state.events.map(function(event, i){
+          singleEvent.map(function(event, i){
 
-                if(event.food === "Cookies") var pic = require("../../images/cookie.png"); 
-                else if (event.food === "Pizza") var pic = require("../../images/Pizza-icon.png");
-                else if (event.food === "Coffee") var pic = require("../../images/coffee.png"); 
-                else if (event.food === "Bagels") var pic = require("../../images/bagel.png");
-                else if (event.food === "Sandwiches") var pic = require("../../images/sandwiches.png");  
-                     
+                if(singleEvent[0].food === "Cookies") var pic = require("../../images/cookie.png"); 
+                else if (singleEvent[0].food === "Pizza") var pic = require("../../images/Pizza-icon.png");
+                else if (singleEvent[0].food === "Coffee") var pic = require("../../images/coffee.png"); 
+                else if (singleEvent[0].food === "Bagels") var pic = require("../../images/bagel.png");
+                else if (singleEvent[0].food === "Sandwiches") var pic = require("../../images/sandwiches.png");                  
 
               return( 
 
-                  <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event:event})}>
+                  <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event: singleEvent[0]})}>
 
                       <MapView.Marker
-                        coordinate={{latitude: event.lat,
+                        coordinate={{latitude: singleEvent[0].lat,
                                     longitude: event.long}}
-                        title={event.name}
-                        description={event.shortDescription}      
+                        title={singleEvent[0].name}
+                        description={singleEvent[0].shortDescription}      
                       > 
                         
                         <Image
-                          style={{width: event.imgWidth, height: event.imgHeight}}
+                          style={{width: singleEvent[0].imgWidth, height: singleEvent[0].imgHeight}}
                           source={pic}
 
                         />
@@ -161,7 +136,7 @@ export default class MapScreen extends Component {
                   })
                 }
 
-          <MapView.Marker
+            <MapView.Marker
                 coordinate={{latitude: 40.444780,
                              longitude: -79.954853}}
                 title={"You"}
@@ -173,7 +148,7 @@ export default class MapScreen extends Component {
                     source={require("../../images/you.png")}
 
                 />
-          </MapView.Marker>
+            </MapView.Marker>
          
      </MapView>
    </View>
