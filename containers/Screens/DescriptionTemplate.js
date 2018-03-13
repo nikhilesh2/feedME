@@ -1,7 +1,9 @@
 import React from 'react';
-import {View, Text, StyleSheet, Platform, Dimensions, ScrollView, TouchableWithoutFeedback } from 'react-native';
+import {View, Text, StyleSheet, Platform, Dimensions, ScrollView, TouchableWithoutFeedback, Modal, Image } from 'react-native';
 import { Toolbar, ActionButton, Card } from 'react-native-material-ui';
 import { Container, Header, Title, Left, Icon, Right, Button, Body, Content, CardItem } from "native-base";
+import MapView, { Marker } from 'react-native-maps';
+import IonIcon from 'react-native-vector-icons/Ionicons';
 
 import { UITheme } from '../../utils/MuiTheme';
 import AppBar from '../../components/AppBar';
@@ -25,7 +27,12 @@ import {
 var {height, width} = Dimensions.get('window')
 
 export default class Template extends React.Component {
-
+  constructor(props) {
+    super(props);
+    this.state = {
+      modalVisible: false,
+    }
+  }
   
   render() {
     // var {navigate} = this.prop.navigation;
@@ -36,10 +43,14 @@ export default class Template extends React.Component {
     var event = this.props.navigation.state.params.event;
     var array = [event];
     
-    
+    if(event.food === "Cookies") var pic = require("../../images/cookie.png"); 
+    else if (event.food === "Pizza") var pic = require("../../images/Pizza-icon.png");
+    else if (event.food === "Coffee") var pic = require("../../images/coffee.png"); 
+    else if (event.food === "Bagels") var pic = require("../../images/bagel.png");
+    else if (event.food === "Sandwiches") var pic = require("../../images/sandwiches.png");  
+ 
     return (
      
-      
       <View>
       
           <DescBar name = {event.name} navigation = {navigate}/>
@@ -73,13 +84,48 @@ export default class Template extends React.Component {
 
               
                 <View style={row}>
-                <TouchableWithoutFeedback onPress={() => navigate.navigate("singleItemMap", {event: array})}>
+                <TouchableWithoutFeedback onPress={() => {this.setState({modalVisible: !this.state.modalVisible})}}>
                 <View style ={{backgroundColor: 'orange', width: '100%', height: 50, alignItems: 'center'}}>
                   <Text style={{ color: 'white', paddingTop: 15, fontWeight: 'bold', fontSize: 15}}>View on Map</Text>
                 </View>
                 </TouchableWithoutFeedback>
                 </View>
-              
+                <Modal
+                  visible={this.state.modalVisible}
+                  animationType={'slide'}  
+                >
+                  <View>
+                    <View style={{ flexDirection: 'row', paddingTop: 35, paddingBottom: 20, backgroundColor: UITheme.palette.primaryColor, justifyContent: 'center', alignItems: 'center'}}>
+                       <Text style={{ alignSelf: 'center', textAlign: 'center', fontSize: 22, fontWeight: 'bold', color: 'white' }}>{event.date}</Text>
+                        <View style={{ position: 'absolute', left: '90%', top: 20 }}>
+                        <TouchableWithoutFeedback onPress={() => {this.setState({modalVisible: false})}}>
+                          <IonIcon name="ios-close" size={55} color="white" style={{ alignSelf: 'flex-end' }}/>
+                        </TouchableWithoutFeedback>
+                        </View>
+                    </View>
+                   
+                    <MapView style={styles.map}
+                      initialRegion={{
+                        latitude: event.lat,
+                        longitude: event.long,
+                        latitudeDelta: 0.0222,
+                        longitudeDelta: 0.0121,
+                      }}
+                    >
+                      <MapView.Marker
+                        coordinate={{latitude: event.lat, longitude: event.long}}
+                        title={event.name}
+                        description={event.shortDescription}      
+                      > 
+                        <Image
+                          style={{width: event.imgWidth, height: event.imgHeight}}
+                          source={pic}
+                        />
+                      </MapView.Marker>
+                    
+                    </MapView>
+                    </View>
+                </Modal>
 
               
                 
@@ -107,7 +153,17 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -340,
     right: -5,
-  }
+  },
+  map: {
+    left: 0,
+    right: 0,
+    top: 0,
+    bottom: 0,
+    alignSelf: 'stretch',
+    marginTop: 0,
+    height: '100%',
+    width: 380,
+  },
 
 })
 

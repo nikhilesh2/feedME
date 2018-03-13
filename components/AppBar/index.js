@@ -14,7 +14,6 @@ export default class AppBar extends React.Component {
    constructor(props) {
     super(props);
     this.state = {
-      modalVisible: false,
       selectedDate: 6,
       events: events,
       numEvents: 6
@@ -113,7 +112,7 @@ export default class AppBar extends React.Component {
     	<View style={style}>
        
       
-      <TouchableWithoutFeedback onPress={() => {this.props.handleOpen()}} style={{backgroundColor: 'blue', position:'absolute'}}>
+      <TouchableWithoutFeedback onPress={() => { this.props.handleOpen()} } style={{backgroundColor: 'blue', position:'absolute'}}>
           <View style={{position:'absolute' }}>
             <EntypoIcon name="plus" size={40} color='white' />
           </View>
@@ -199,6 +198,7 @@ const style = {
   backgroundColor: UITheme.palette.primaryColor,
   height: height/2.7,
   paddingTop: (Platform.OS === 'ios') ? 30 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
+  paddingTop: height >= 800 ? 60 : 30
 }
 const calendarStrip = StyleSheet.create({
   contentContainer: {

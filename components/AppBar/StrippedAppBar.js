@@ -158,6 +158,7 @@ const style = {
   backgroundColor: UITheme.palette.primaryColor,
   height: height/4,
   paddingTop: (Platform.OS === 'ios') ? 30 : 0, //this is just to test if the platform is iOS to give it a height of 20, else, no height (Android apps have their own status bar)
+  paddingTop: height >= 800 ? 60 : 30
 }
 const calendarStrip = StyleSheet.create({
   contentContainer: {

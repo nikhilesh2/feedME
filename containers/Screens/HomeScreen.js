@@ -65,8 +65,6 @@ export default class HomePage extends React.Component {
   
   render() {
     const hold = this;
-    console.log("STATE");
-    console.log(this.state)
 
     const navigate = this.props.navigation;
     // var {navigate} = this.prop.navigation;
@@ -90,7 +88,7 @@ export default class HomePage extends React.Component {
               <View style={{height: '100%'}}>
 
                 {
-                  
+
                   this.state.events.map(function(event, i){
                       
                      return( 

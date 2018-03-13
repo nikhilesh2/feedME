@@ -56,14 +56,14 @@ const styles = StyleSheet.create({
     marginBottom: 5,
   },
   map: {
-       left: 0,
-       right: 0,
-       top: 0,
-       bottom: 0,
-       alignSelf: 'stretch',
-         marginTop: 0,
-       height: 500,
-       width: 380,
+   left: 0,
+   right: 0,
+   top: 0,
+   bottom: 0,
+   alignSelf: 'stretch',
+  marginTop: 0,
+   height: '100%',
+   width: 380,
 
      },
      main: {
@@ -130,31 +130,29 @@ export default class MapScreen extends Component {
        {
           this.state.events.map(function(event, i){
 
-                if(event.food === "Cookies") var pic = require("../../images/cookie.png"); 
-                else if (event.food === "Pizza") var pic = require("../../images/Pizza-icon.png");
-                else if (event.food === "Coffee") var pic = require("../../images/coffee.png"); 
-                else if (event.food === "Bagels") var pic = require("../../images/bagel.png");
-                else if (event.food === "Sandwiches") var pic = require("../../images/sandwiches.png");  
+            if(event.food === "Cookies") var pic = require("../../images/cookie.png"); 
+            else if (event.food === "Pizza") var pic = require("../../images/Pizza-icon.png");
+            else if (event.food === "Coffee") var pic = require("../../images/coffee.png"); 
+            else if (event.food === "Bagels") var pic = require("../../images/bagel.png");
+            else if (event.food === "Sandwiches") var pic = require("../../images/sandwiches.png");  
                      
 
-              return( 
+            return( 
 
-                  <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event:event})}>
+              <TouchableWithoutFeedback key={i} onPress={() => navigate.navigate("Template", {event:event})}>
 
-                      <MapView.Marker
-                        coordinate={{latitude: event.lat,
-                                    longitude: event.long}}
-                        title={event.name}
-                        description={event.shortDescription}      
-                      > 
-                        
-                        <Image
-                          style={{width: event.imgWidth, height: event.imgHeight}}
-                          source={pic}
+                <MapView.Marker
+                  coordinate={{latitude: event.lat, longitude: event.long}}
+                  title={event.name}
+                  description={event.shortDescription}      
+                > 
+                  <Image
+                    style={{width: event.imgWidth, height: event.imgHeight}}
+                    source={pic}
 
-                        />
-                      </MapView.Marker>
-                </TouchableWithoutFeedback>
+                  />
+                </MapView.Marker>
+            </TouchableWithoutFeedback>
               )
 
 
